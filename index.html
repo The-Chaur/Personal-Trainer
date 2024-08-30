@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, 
+    initial-scale=1.0"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <title>Document</title>
+  </head>
+
+  <body id="body">
+    <header>
+      <button class="rest-button">Rest</button>
+
+      <div>
+        <h1 class="title">Workout Name</h1>
+
+        <h2 class="time-elapsed">0</h2>
+      </div>
+
+      <button class="finish-button">Finish</button>
+    </header>
+
+    <section id="main-display" class="main-display">
+      <div class="exercise">
+        <h3 class="exercise-name">Face Pull (cable)</h3>
+
+        <div class="button-layout">
+          <button class="edit-exercise-name-btn">Edit</button>
+          <button class="add-set-btn">Add Set</button>
+          <button class="delete-exercise-btn">Delete</button>
+        </div>
+
+        <div class="container">
+          <div class="container-header set-header">Set</div>
+
+          <div class="container-header kg-header">Weight</div>
+
+          <div class="container-header reps-header">Reps</div>
+
+          <div class="container-header check-header">
+            <i class="fas fa-check"></i>
+          </div>
+
+          <div class="set">
+            <div class="set-number">1</div>
+
+            <div class="kg-number">
+              <input type="text" inputmode="numeric" name="kg" id="kg-number" />
+            </div>
+
+            <div class="reps-number">
+              <input
+                type="text"
+                inputmode="numeric"
+                name="reps"
+                id="reps-number"
+              />
+            </div>
+
+            <div class="check-set">
+              <input type="checkbox" name="check-set" id="check-set" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer">
+      <button id="add-exercises" class="add-exercises">Add Exercises</button>
+
+      <button id="cancel-button" class="cancel-button">Cancel Workout</button>
+    </section>
+
+    <dialog id="rest-timer-dialog">
+      <h2>Time Remaining:</h2>
+      <p>00:00</p>
+    </dialog>
+    <script src="script.js"></script>
+  </body>
+</html>

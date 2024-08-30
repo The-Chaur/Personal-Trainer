@@ -1,0 +1,179 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --header-color: #000;
+  --body-color: #044444;
+  --exercise-color: #077777;
+  --text-color: #fff;
+
+  --exercise-size: 300px;
+  --exercise-padding: calc(var(--exercise-size) / 30);
+  --set-size: calc(var(--exercise-size) - (2 * var(--exercise-padding)));
+
+  --set-width: 55px;
+  --kg-width: 85px;
+  --reps-width: 85px;
+  --check-width: 55px;
+}
+
+body {
+  background: var(--body-color);
+  font-family: Helvetica, sans-serif;
+  color: var(--text-color);
+}
+
+header {
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  background: var(--header-color);
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 1.75rem;
+}
+
+header button {
+  width: 60px;
+  height: 30px;
+}
+
+.main-display {
+  display: flex;
+  flex-direction: column;
+}
+
+.exercise {
+  width: var(--exercise-size);
+  margin: 15px auto;
+  padding: var(--exercise-padding);
+  background: var(--exercise-color);
+  border-radius: 10px;
+}
+.exercise:first-of-type {
+  margin-top: 30px;
+}
+
+.exercise h3 {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.button-layout {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  margin: 0 0 10px 0;
+}
+.button-layout button {
+  height: 20px;
+  margin: 0 auto;
+  min-width: 60px;
+}
+.add-set-btn {
+  width: 100px;
+}
+
+.container {
+  width: var(--set-size);
+  display: grid;
+  row-gap: 5px;
+  grid-template-columns: var(--set-width) var(--kg-width) var(--reps-width) var(
+      --check-width
+    );
+  grid-auto-rows: 40px;
+  position: relative;
+
+  grid-template-rows: 25px 40px;
+}
+
+.container-header {
+  background: var(--header-color);
+  border-radius: 10px;
+  margin: auto;
+  text-align: center;
+  width: 40px;
+}
+
+.set-header {
+  width: 45px;
+}
+.check-header {
+  width: 35px;
+}
+.reps-header {
+  width: 70px;
+}
+
+.kg-header {
+  width: 70px;
+}
+.add-set {
+  grid-column: 1/ 5;
+  display: flex;
+  align-items: center;
+  grid-row-end: -1;
+}
+.add-set button {
+  width: 100%;
+  border-radius: 10px;
+  height: 75%;
+  /*need to change ^*/
+}
+.set {
+  grid-column: 1 / 5;
+
+  display: grid;
+  grid-template-columns: var(--set-width) var(--kg-width) var(--reps-width) var(
+      --check-width
+    );
+
+  border: 2px solid black;
+  border-radius: 10px;
+  align-items: center;
+}
+
+.set div {
+  margin: 5px auto;
+}
+
+#reps-number,
+#kg-number {
+  width: 60px;
+}
+.footer {
+  margin-top: 15px;
+}
+
+.footer button {
+  width: 60%;
+
+  margin-left: 20%;
+
+  margin-top: 10px;
+
+  margin-bottom: 10px;
+
+  height: 25px;
+}
+
+.white {
+  background: #fff !important;
+}
+
+dialog {
+  background-color: black;
+  color: white;
+  height: 50vh;
+  width: 50vw;
+  margin: auto;
+}
+dialog * {
+  text-align: center;
+  margin-bottom: 100px;
+}
