@@ -9,6 +9,7 @@
   --body-color: #044444;
   --exercise-color: #077777;
   --text-color: #fff;
+  --dialog-color: #077777;
 
   --exercise-size: 300px;
   --exercise-padding: calc(var(--exercise-size) / 30);
@@ -167,13 +168,29 @@ header button {
 }
 
 dialog {
-  background-color: black;
+  background-color: var(--dialog-color);
+  border: none;
+  border-radius: 15px;
+  display: none;
+
+  flex-direction: column;
+  padding: 17px;
   color: white;
-  height: 50vh;
-  width: 50vw;
+  width: 80%;
+
   margin: auto;
 }
 dialog * {
   text-align: center;
-  margin-bottom: 100px;
+  margin-bottom: 15px;
+}
+dialog p {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+dialog p:first-of-type {
+  font-size: 1.3rem;
+}
+#rest-timer-dialog {
+  background-color: lightgreen;
 }

@@ -83,7 +83,16 @@
 
       <button id="cancel-button" class="cancel-button">Cancel Workout</button>
     </section>
-
+    <dialog id="primary-dialog">
+      <form>
+        <p>Exercise Name</p>
+        <input type="text" id="exercise-name-input" />
+        <p>Auto Rest Timer</p>
+        <input type="number" id="rest-minutes-input" />
+        <input type="number" id="rest-seconds-input" />
+        <input type="submit" value="Submit" id="dialog-form-submit" />
+      </form>
+    </dialog>
     <dialog id="rest-timer-dialog">
       <h2>Time Remaining:</h2>
       <p>00:00</p>

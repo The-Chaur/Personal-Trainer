@@ -6,6 +6,9 @@ const finishButton = document.querySelector(".finish-button");
 const timeElapsed = document.querySelector(".time-elapsed");
 const addSetButton = document.querySelector(".add-set-btn");
 const stopwatch = document.querySelector(".time-elapsed");
+const timeDialog = document.getElementById("rest-timer-dialog");
+const primaryDialog = document.querySelector("#primary-dialog");
+
 stopwatch.textContent = "00:00";
 let totalTimeElapsed = 0;
 const formatTime = (time) => {
@@ -129,13 +132,10 @@ const createExercise = () => {
 
 addExerciseButton.addEventListener("click", createExercise);
 
-function setTimer(
-  time = 100,
-  dialog = document.getElementById("rest-timer-dialog")
-) {
+function setTimer(time = 100) {
   const timeRemaining = time;
-  const timer = dialog.children[1];
-  dialog.showModal();
+  const timer = timeDialog.children[1];
+  timeDialog.style.display = "flex";
 
   const updateTimer = () => {
     const minutes = Math.floor(timeRemaining / 60);
