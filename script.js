@@ -10,6 +10,7 @@ const stopwatch = document.querySelector(".time-elapsed");
 const timeDialog = document.getElementById("rest-timer-dialog");
 const primaryDialog = document.querySelector("#primary-dialog");
 const timer = document.querySelector("#time-display");
+const xAttributes = {};
 
 stopwatch.textContent = "00:00";
 let totalTimeElapsed = 0;
@@ -17,9 +18,9 @@ const formatTime = (time) => {
   return time >= 10 ? time : `0${time}`;
 };
 const updateTimeElapsed = () => {
-  hours = Math.floor(totalTimeElapsed / 3600);
-  minutes = Math.floor((totalTimeElapsed - hours * 3600) / 60);
-  seconds = Math.floor(totalTimeElapsed - minutes * 60 - hours * 3600);
+  let hours = Math.floor(totalTimeElapsed / 3600);
+  let minutes = Math.floor((totalTimeElapsed - hours * 3600) / 60);
+  let seconds = Math.floor(totalTimeElapsed - minutes * 60 - hours * 3600);
   if (hours != 0) {
     stopwatch.textContent = `${formatTime(hours)}:${formatTime(
       minutes
@@ -37,6 +38,26 @@ const exerciseList = [];
 cancelButton.addEventListener("click", () => {
   mainDisplay.innerHTML = ``;
 });
+
+function showPrimaryDialog() {
+  primaryDialog.showModal();
+  primaryDialog.style.display = "flex";
+}
+showPrimaryDialog();
+document
+  .getElementById("dialog-form-submit")
+  .addEventListener("click", (event) => {
+    event.preventDefault();
+    primaryDialog.close();
+    primaryDialog.style.display = "none";
+    let xname = document.getElementById("exercise-name-input").value;
+    let xmins = document.getElementById("rest-minutes-input").value;
+    let xsex = document.getElementById("rest-seconds-input").value;
+    let xtime = xsex + xmins * 60;
+
+    xAttributes.name = xname;
+    xAttributes.time = xtime;
+  });
 
 class Exercise {
   constructor(name = "Placeholder", index) {
@@ -135,13 +156,17 @@ const createExercise = () => {
 addExerciseButton.addEventListener("click", createExercise);
 
 let isResting = false;
-function setTimer(time = 100) {
-  let timeRemaining = 60;
+function setTimer(time = 60) {
+  let timeRemaining = time;
   timeDialog.style.display = "flex";
   timeDialog.showModal();
   restButton.classList.add("resting");
   isResting = true;
   const updateTimer = () => {
+    if (!isResting) {
+      clearInterval(timeInterval);
+      return;
+    }
     let minutes = Math.floor(timeRemaining / 60);
     let seconds = timeRemaining - minutes * 60;
     timer.textContent = `${formatTime(minutes)}:${formatTime(seconds)}`;
@@ -161,6 +186,16 @@ function setTimer(time = 100) {
   const timeInterval = setInterval(updateTimer, 1000);
   updateTimer();
 }
+document.getElementById("cancel-rest-timer").onclick = unrest;
+
+function unrest() {
+  isResting = false;
+  timeDialog.close();
+  timeDialog.style.display = "none";
+  restButton.textContent = "Rest";
+  restButton.classList.remove("resting");
+}
+
 function restClicked() {
   const computedStyle = window.getComputedStyle(timeDialog);
   const displayType = computedStyle.display;

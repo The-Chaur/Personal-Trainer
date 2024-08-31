@@ -174,14 +174,21 @@ dialog {
   background-color: var(--dialog-color);
   border: none;
   border-radius: 15px;
-  display: none;
-
   flex-direction: column;
   padding: 17px;
   color: white;
-  width: 80%;
+  width: 75vw;
 
   margin: auto;
+}
+#primary-dialog input:last-of-type {
+  width: 60%;
+  height: 15%;
+  margin-bottom: 0px;
+  margin-top: 5px;
+}
+#primary-dialog input:not(:first-of-type, :last-of-type) {
+  width: 20%;
 }
 dialog * {
   text-align: center;
