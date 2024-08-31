@@ -1,4 +1,5 @@
 const mainDisplay = document.getElementById("main-display");
+const mainTitle = document.querySelector(".title");
 const addExerciseButton = document.getElementById("add-exercises");
 const cancelButton = document.getElementById("cancel-button");
 const restButton = document.querySelector(".rest-button");
@@ -8,6 +9,7 @@ const addSetButton = document.querySelector(".add-set-btn");
 const stopwatch = document.querySelector(".time-elapsed");
 const timeDialog = document.getElementById("rest-timer-dialog");
 const primaryDialog = document.querySelector("#primary-dialog");
+const timer = document.querySelector("#time-display");
 
 stopwatch.textContent = "00:00";
 let totalTimeElapsed = 0;
@@ -16,8 +18,8 @@ const formatTime = (time) => {
 };
 const updateTimeElapsed = () => {
   hours = Math.floor(totalTimeElapsed / 3600);
-  minutes = Math.floor((totalTimeElapsed - hours * 60) / 60);
-  seconds = Math.floor(totalTimeElapsed - hours * 3600 - minutes * 60);
+  minutes = Math.floor((totalTimeElapsed - hours * 3600) / 60);
+  seconds = Math.floor(totalTimeElapsed - minutes * 60 - hours * 3600);
   if (hours != 0) {
     stopwatch.textContent = `${formatTime(hours)}:${formatTime(
       minutes
@@ -132,19 +134,26 @@ const createExercise = () => {
 
 addExerciseButton.addEventListener("click", createExercise);
 
+let isResting = false;
 function setTimer(time = 100) {
-  const timeRemaining = time;
-  const timer = timeDialog.children[1];
+  let timeRemaining = 60;
   timeDialog.style.display = "flex";
-
+  timeDialog.showModal();
+  restButton.classList.add("resting");
+  isResting = true;
   const updateTimer = () => {
-    const minutes = Math.floor(timeRemaining / 60);
-    const seconds = timeRemaining - minutes * 60;
-    timer.textContent = `${minutes}:${seconds}`;
+    let minutes = Math.floor(timeRemaining / 60);
+    let seconds = timeRemaining - minutes * 60;
+    timer.textContent = `${formatTime(minutes)}:${formatTime(seconds)}`;
+    restButton.textContent = `${formatTime(minutes)}:${formatTime(seconds)}`;
 
     if (timeRemaining == 0) {
       clearInterval(timeInterval);
+      timeDialog.style.display = "flex";
       timer.textContent = `TIME'S UP!`;
+      restButton.textContent = `Rest`;
+      restButton.classList.remove("resting");
+      isResting = false;
     } else {
       timeRemaining--;
     }
@@ -152,7 +161,14 @@ function setTimer(time = 100) {
   const timeInterval = setInterval(updateTimer, 1000);
   updateTimer();
 }
-
-restButton.addEventListener("click", setTimer);
+function restClicked() {
+  const computedStyle = window.getComputedStyle(timeDialog);
+  const displayType = computedStyle.display;
+  if (!isResting) {
+    setTimer();
+  } else {
+  }
+}
+restButton.addEventListener("click", restClicked);
 
 const commitTest = 69;
