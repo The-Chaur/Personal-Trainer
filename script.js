@@ -1,5 +1,6 @@
 const mainDisplay = document.getElementById("main-display");
 const mainTitle = document.querySelector(".title");
+const hiddenInput = document.getElementById("hidden-input");
 const addExerciseButton = document.getElementById("add-exercises");
 const cancelButton = document.getElementById("cancel-button");
 const restButton = document.querySelector(".rest-button");
@@ -10,7 +11,17 @@ const stopwatch = document.querySelector(".time-elapsed");
 const timeDialog = document.getElementById("rest-timer-dialog");
 const primaryDialog = document.querySelector("#primary-dialog");
 const timer = document.querySelector("#time-display");
+
+mainTitle.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    hiddenInput.focus();
+  }
+});
+
 const xAttributes = {};
+const masterList = [];
+let masterIndex = 0;
 
 stopwatch.textContent = "00:00";
 let totalTimeElapsed = 0;
@@ -62,7 +73,7 @@ document
 class Exercise {
   constructor(name = "Placeholder", index) {
     this.exerciseName = name;
-    this.index = index;
+    this.index = masterIndex;
     this.sets = [
       {
         weight: 0,
@@ -72,12 +83,24 @@ class Exercise {
     ];
     this.exerciseElement = document.createElement("div");
     this.containerElement = document.createElement("div");
+    masterList.push({
+      masterIndex: this,
+    });
+    masterIndex++;
   }
   create() {
     this.exerciseElement.classList.add("exercise");
     mainDisplay.appendChild(this.exerciseElement);
     const name = document.createElement("h3");
     name.classList.add("exercise-name");
+    name.setAttribute("contenteditable", "true");
+    name.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        hiddenInput.focus();
+      }
+    });
+
     name.textContent = this.exerciseName;
     this.exerciseElement.appendChild(name);
     this.containerElement.classList.add("container");

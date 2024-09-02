@@ -204,3 +204,8 @@ dialog p:first-of-type {
 #rest-timer-dialog {
   background-color: lightgreen;
 }
+#hidden-input {
+  position: absolute;
+  top: -5000px;
+  left: -5000px;
+}
